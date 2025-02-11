@@ -398,3 +398,56 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Dart & Flutter
+.dart_tool/
+.packages
+build/
+.idea/
+.vscode/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+*.lock
+
+# Flutter specific
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/ServiceDefinitions.json
+ios/Runner/GeneratedPluginRegistrant.*
+
+# Android specific
+android/.gradle/
+android/app/build/
+android/local.properties
+android/.idea/
+android/gradle/
+android/gradlew
+android/gradlew.bat
+android/gradle-wrapper.properties
+
+# Web specific
+web/.dart_tool/
+web/.packages
+web/build/
+
+# macOS specific
+macos/.dart_tool/
+macos/.packages
+macos/build/
+
+# Windows specific
+windows/.dart_tool/
+windows/.packages
+windows/build/
+
+# Linux specific
+linux/.dart_tool/
+linux/.packages
+linux/build/
+
+# Other
+*.iml
+*.ipr
+*.iws
+*.swp
