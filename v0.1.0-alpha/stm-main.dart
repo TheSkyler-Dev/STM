@@ -2,8 +2,10 @@
 
 import 'dart:convert'; // For JSON parsing
 import 'dart:io'; // For file operations
+//import 'package:flutter/material.dart'; // For Flutter widgets
 
 void main() {
+  
   // Call the function to read and parse the JSON file
   parseJsonFile('ext_data/workers.json').then((jsonData) {
     print(jsonData); // Print the parsed JSON data
@@ -13,7 +15,7 @@ void main() {
 }
 
 // Function to read and parse the JSON file asynchronously
-Future<Map<String, dynamic>> parseJsonFile(String filePath) async {
+Future<dynamic> parseJsonFile(String filePath) async {
   try {
     final file = File(filePath);
     final contents = await file.readAsString();
