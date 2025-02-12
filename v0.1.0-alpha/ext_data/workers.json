@@ -2,5 +2,41 @@
     {
         "worker": 1,
         "storage_units": []
+    },
+    {
+        "worker": 2,
+        "storage_units": []
+    },
+    {
+        "worker": 3,
+        "storage_units": []
+    },
+    {
+        "worker": 4,
+        "storage_units": []
+    },
+    {
+        "worker": 5,
+        "storage_units": []
+    },
+    {
+        "worker": 6,
+        "storage_units": []
+    },
+    {
+        "worker": 7,
+        "storage_units": []
+    },
+    {
+        "worker": 8,
+        "storage_units": []
+    },
+    {
+        "worker": 9,
+        "storage_units": []
+    },
+    {
+        "worker": 10,
+        "storage_units": []
     }
 ]
