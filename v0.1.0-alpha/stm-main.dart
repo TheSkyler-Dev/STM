@@ -9,61 +9,21 @@ void main() async {
 
 
   // Call the function to read and parse the JSON file
-  List<dynamic> storageUnits = [];
+  List<dynamic> workers = [];
   final jsonData = await parseJsonFile('ext_data/workers.json');
   try {
-    storageUnits = jsonData['storage_units'];
+    workers = jsonData;
   } catch (e){
     throw Exception('Failed to load JSON file: $e');
   }
 
-  while (true){
-    print('\nStorage Units:');
-    for (int i = 0; i < storageUnits.length; i++){
-      print('${i + 1}. Storage Unit ${i +1}: ${storageUnits[i]}');
-    }
-
-    print('\nGraphical Representation:');
-    displayStorageUnits(storageUnits);
-
-    print('\nOptions:');
-    print('1. Edit a storage unit');
-    print('2. Save and exit');
-    print('3. Exit without saving');
-    stdout.write('Choose and option: ');
-    String? choice = stdin.readLineSync();
-
-    switch(choice){
-      case '1':
-      stdout.write('Enter the storage unit number to edit: ');
-      String? unitNumberStr = stdin.readLineSync();
-      int? unitNumber = int.tryParse(unitNumberStr ?? '');
-      if (unitNumber != null && unitNumber > 0 && unitNumber <= storageUnits.length) {
-        stdout.write('Enter the new assignment for Storage Unit $unitNumber: ');
-        String? newAssignment = stdin.readLineSync();
-        if (newAssignment != null) {
-          storageUnits[unitNumber - 1] = newAssignment;
-        } else {
-          print('Invalid assignment.');
-        }
-      } else {
-        print('Invalid storage unit number.');
-      }
-      break;
-
-      case '2':
-      jsonData['storage_units'] = storageUnits;
-      await saveJsonFile('ext_data/workers.json', jsonData);
-      print('Changes saved.');
-      break;
-
-      case '3':
-      break;
-
-      default:
-      print('Invalid option.');
-    }
+  print('\nWorkers and their assigned storage units');
+  for (int i = 0; i < workers.length; i++){
+    print('Worker ${workers[i]['worker']}: ${workers[i]['storage_units']}');
   }
+
+  print('\nGraphical Representation:');
+  displayStorageUnits(workers);
 }
 
 // Function to read and parse the JSON file asynchronously
@@ -78,28 +38,32 @@ Future<dynamic> parseJsonFile(String filePath) async {
   }
 }
 
-//Function to save the JSON file
-Future<void> saveJsonFile(String filePath, Map<String, dynamic> jsonData) async {
-  try {
-    final file = File(filePath);
-    final contents = jsonEncode(jsonData);
-    await file.writeAsString(contents);
-  } catch (e){
-    throw Exception('Failed to save the JSON file: $e');
-  }
-}
-
-//Function to display storage units with LEDs
-void displayStorageUnits(List<dynamic> storageUnits){
+// Function to display storage units with LEDs
+void displayStorageUnits(List<dynamic> workers) {
   const int maxWorkersPerUnit = 6;
-  const List<String> ledColors = ['R', 'G', 'B', 'Y', 'M', 'C']; //representing colors with letters
+  const List<String> ledColors = ['R', 'G', 'B', 'Y', 'M', 'C']; // Representing colors with letters
 
-  for (int i = 0; i < storageUnits.length; i++){
-    List<String> workers = storageUnits[i].split(',').map((e) => e.trim()).toList();
-    print('Storage Unit ${i + 1}:');
-    for (int j = 0; j < maxWorkersPerUnit; j++){
-      if (j < workers.length){
-        print('LED ${j +1}: ${ledColors[j % ledColors.length]} - ${workers[j]}');
+  // Create a map to store the storage units and their assigned workers
+  Map<int, List<int>> storageUnitMap = {};
+
+  for (var worker in workers) {
+    int workerId = worker['worker'];
+    List<dynamic> storageUnits = worker['storage_units'];
+    for (var unit in storageUnits) {
+      if (!storageUnitMap.containsKey(unit)) {
+        storageUnitMap[unit] = [];
+      }
+      storageUnitMap[unit]!.add(workerId);
+    }
+  }
+
+  // Display the storage units with LEDs
+  for (var unit in storageUnitMap.keys) {
+    List<int> assignedWorkers = storageUnitMap[unit]!;
+    print('Storage Unit $unit:');
+    for (int j = 0; j < maxWorkersPerUnit; j++) {
+      if (j < assignedWorkers.length) {
+        print('LED ${j + 1}: ${ledColors[j % ledColors.length]} - Worker ${assignedWorkers[j]}');
       } else {
         print('LED ${j + 1}: Off');
       }
