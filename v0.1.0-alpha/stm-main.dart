@@ -74,13 +74,13 @@ void displayStorageUnits(List<dynamic> workers) {
     int remainingLeds = maxWorkersPerUnit;
 
     for (int j = 0; j < maxWorkersPerUnit; j++) {
-      int thisWorker = (j < numWorkers -1) ? ledsPerWorker : remainingLeds;
-      for (int k = 0; k < thisWorker; k++){
+      int ledsForThisWorker = (j < numWorkers -1) ? ledsPerWorker : remainingLeds;
+      for (int k = 0; k < ledsForThisWorker; k++){
         print('LED ${maxWorkersPerUnit - remainingLeds + 1}: ${workerColors[assignedWorkers[j]]} - Worker ${assignedWorkers[j]}');
         remainingLeds--;
       }
     }
-    
+
     print('');
   }
 }
