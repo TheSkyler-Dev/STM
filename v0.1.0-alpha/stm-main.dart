@@ -41,10 +41,16 @@ Future<dynamic> parseJsonFile(String filePath) async {
 // Function to display storage units with LEDs
 void displayStorageUnits(List<dynamic> workers) {
   const int maxWorkersPerUnit = 6;
-  const List<String> ledColors = ['R', 'G', 'B', 'Y', 'M', 'C']; // Representing colors with letters
+  const List<String> ledColors = ['R', 'G', 'B', 'Y', 'M', 'C', 'P', 'W', 'O', 'K' ]; // Representing colors with letters
 
   // Create a map to store the storage units and their assigned workers
   Map<int, List<int>> storageUnitMap = {};
+
+  //Create a map to assign fixed colors to workers
+  Map<int, String> workerColors = {};
+  for (int i = 0; i < workers.length; i++){
+    workerColors[workers[i]['worker']] = ledColors[i % ledColors.length];
+  }
 
   for (var worker in workers) {
     int workerId = worker['worker'];
@@ -61,11 +67,15 @@ void displayStorageUnits(List<dynamic> workers) {
   for (var unit in storageUnitMap.keys) {
     List<int> assignedWorkers = storageUnitMap[unit]!;
     print('Storage Unit $unit:');
+    int numWorkers = assignedWorkers.length;
+    int ledsPerWorker = (maxWorkersPerUnit / numWorkers).ceil();
+    int remainingLeds = maxWorkersPerUnit;
+
     for (int j = 0; j < maxWorkersPerUnit; j++) {
-      if (j < assignedWorkers.length) {
-        print('LED ${j + 1}: ${ledColors[j % ledColors.length]} - Worker ${assignedWorkers[j]}');
-      } else {
-        print('LED ${j + 1}: Off');
+      int thisWorker = (j < numWorkers -1) ? ledsPerWorker : remainingLeds;
+      for (int k = 0; k < thisWorker; k++){
+        print('LED ${maxWorkersPerUnit - remainingLeds + 1}: ${workerColors[assignedWorkers[j]]} - Worker ${assignedWorkers[j]}');
+        remainingLeds--;
       }
     }
     print('');
