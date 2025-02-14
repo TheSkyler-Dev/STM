@@ -55,12 +55,14 @@ void displayStorageUnits(List<dynamic> workers) {
   for (var worker in workers) {
     int workerId = worker['worker'];
     List<dynamic> storageUnits = worker['storage_units'];
+
     for (var unit in storageUnits) {
       if (!storageUnitMap.containsKey(unit)) {
         storageUnitMap[unit] = [];
       }
       storageUnitMap[unit]!.add(workerId);
     }
+
   }
 
   // Display the storage units with LEDs
@@ -78,6 +80,7 @@ void displayStorageUnits(List<dynamic> workers) {
         remainingLeds--;
       }
     }
+    
     print('');
   }
 }
