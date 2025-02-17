@@ -70,14 +70,17 @@ void displayStorageUnits(List<dynamic> workers) {
     List<int> assignedWorkers = storageUnitMap[unit]!;
     print('Storage Unit $unit:');
     int numWorkers = assignedWorkers.length;
-    int ledsPerWorker = (maxWorkersPerUnit / numWorkers).ceil();
-    int remainingLeds = maxWorkersPerUnit;
+    int ledsPerWorker = maxWorkersPerUnit ~/ numWorkers;
+    int extraLeds = maxWorkersPerUnit % numWorkers;
 
+    int ledIndex = 1;
     for (int j = 0; j < maxWorkersPerUnit; j++) {
-      int ledsForThisWorker = (j < numWorkers -1) ? ledsPerWorker : remainingLeds;
+      int ledsForThisWorker = ledsPerWorker + (j < extraLeds ? 1 : 0);
       for (int k = 0; k < ledsForThisWorker; k++){
-        print('LED ${maxWorkersPerUnit - remainingLeds + 1}: ${workerColors[assignedWorkers[j]]} - Worker ${assignedWorkers[j]}');
-        remainingLeds--;
+        if (j < assignedWorkers.length){
+          print('LED $ledIndex: ${workerColors[assignedWorkers[j]]} - Worker ${assignedWorkers[j]}');
+          ledIndex++;
+        }
       }
     }
 
