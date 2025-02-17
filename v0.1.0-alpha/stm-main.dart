@@ -2,11 +2,11 @@
 
 import 'dart:convert'; // For JSON parsing
 import 'dart:io'; // For file operations
+//import 'package:flutter/material.dart';
 
 void main() async {
-  print('STM: Storage Task Manager CLI');
-  print('=============================');
-
+  //print('STM: Storage Task Manager CLI');
+  //print('=============================');
 
   // Call the function to read and parse the JSON file
   List<dynamic> workers = [];
@@ -65,8 +65,11 @@ void displayStorageUnits(List<dynamic> workers) {
 
   }
 
+  // Sort the storage units sequentially
+  var sortedUnits = storageUnitMap.keys.toList()..sort();
+
   // Display the storage units with LEDs
-  for (var unit in storageUnitMap.keys) {
+  for (var unit in sortedUnits) {
     List<int> assignedWorkers = storageUnitMap[unit]!;
     print('Storage Unit $unit:');
     int numWorkers = assignedWorkers.length;
@@ -76,12 +79,16 @@ void displayStorageUnits(List<dynamic> workers) {
     int ledIndex = 1;
     for (int j = 0; j < maxWorkersPerUnit; j++) {
       int ledsForThisWorker = ledsPerWorker + (j < extraLeds ? 1 : 0);
+
       for (int k = 0; k < ledsForThisWorker; k++){
+
         if (j < assignedWorkers.length){
           print('LED $ledIndex: ${workerColors[assignedWorkers[j]]} - Worker ${assignedWorkers[j]}');
           ledIndex++;
         }
+        
       }
+
     }
 
     print('');
