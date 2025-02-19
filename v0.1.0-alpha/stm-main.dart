@@ -5,8 +5,8 @@ import 'dart:io'; // For file operations
 
 
 void main() async {
-  //print('STM: Storage Task Manager CLI');
-  //print('=============================');
+  print('STM: Storage Task Manager CLI');
+  print('=============================');
 
   // Call the function to read and parse the JSON file
   List<dynamic> workers = [];
