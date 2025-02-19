@@ -1,0 +1,42 @@
+[
+    {
+        "worker": 1,
+        "storage_units": [7, 3, 9]
+    },
+    {
+        "worker": 2,
+        "storage_units": [1, 8, 7]
+    },
+    {
+        "worker": 3,
+        "storage_units": [9, 5, 3]
+    },
+    {
+        "worker": 4,
+        "storage_units": [2, 8, 1]
+    },
+    {
+        "worker": 5,
+        "storage_units": [7, 1, 9]
+    },
+    {
+        "worker": 6,
+        "storage_units": [6, 1, 5]
+    },
+    {
+        "worker": 7,
+        "storage_units": [1, 2, 3]
+    },
+    {
+        "worker": 8,
+        "storage_units": [4, 5, 9]
+    },
+    {
+        "worker": 9,
+        "storage_units": [10, 8, 9]
+    },
+    {
+        "worker": 10,
+        "storage_units": [10, 5, 4]
+    }
+]

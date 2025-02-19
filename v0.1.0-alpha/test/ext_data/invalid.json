@@ -1,0 +1,19 @@
+[
+    {
+        "worker": 1,
+        "storage_units": [7, 3, 9]
+    }
+    {
+        "worker": 2,
+        "storage_units": [1, 8, 7]
+    }
+    {
+        'worker': 1,
+        'storage_units': [7, 3, 9]
+    },
+    {
+        'worker': 2,
+        'storage_units': [1, 8, 7]
+    }
+    
+]
